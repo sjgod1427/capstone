@@ -15,8 +15,7 @@ def create_access_token(data:dict , exp_time:int=30):
 
 def verify_token(token:str):
     try:
-        payload= jwt.decode(token , Settings.JWT_SECRET_KEY , algorithms=[Settings.JWT_ALGORITHM]) #this only verifies the signature
-        payload.validate() # Validate the token's claims (e.g., expiration)
+        payload = jwt.decode(token, Settings.JWT_SECRET_KEY, algorithms=[Settings.JWT_ALGORITHM])
         return payload
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate credentials')

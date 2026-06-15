@@ -10,9 +10,9 @@ class AuthInput(BaseModel):
     password: str
 
 @router.post('/login')
-def login(auth: AuthInput):
+def login(auth: AuthInput, _: None = Depends(get_api_key)):
     if auth.username=="admin" and auth.password=="admin":
         token = create_access_token({'sub':auth.username})
         return {'access_token':token}
-    
+
     return {'error':'Invalid Credentials'}
